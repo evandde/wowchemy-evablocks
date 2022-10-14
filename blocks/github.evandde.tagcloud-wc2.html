@@ -1,0 +1,51 @@
+{{/* My Custom Block */}}
+
+{{/* Get variables */}}
+{{ $baseurl := .Site.BaseURL}}
+{{ $block := .wcBlock }}
+{{ $taxonomy := $block.Params.content.taxonomy | default "tags" }}
+{{ $cloudsize := $block.Params.content.cloudsize | default 10 }}
+{{ $items_count := $block.Params.content.count }}
+{{ if eq $items_count 0 }}
+    {{ $items_count = 65535 }}
+{{ else }}
+    {{ $items_count = $items_count | default 20 }}
+{{ end }}
+
+{{/* Query */}}
+{{ $tags := first $items_count (index site.Taxonomies $taxonomy).ByCount }}
+
+{{/* Add your block layout below */}}
+{{/* Access custom front matter options via $block.Params */}}
+
+<h2>{{$block.Title}}</h2>
+
+<section class="taxonomy-terms">
+    <div id="tag-wrapper" style="width: 100%; height: 400px;"></div>
+
+    <script src="{{ $baseurl }}js/wordcloud2.js"></script>
+    <script>
+        let tagArray = new Array();
+        {{ range $name, $term := $tags }}
+            {{ $tagCount := len $term.Pages }}
+            tagArray.push([{{ .Page.Title }}, {{ $tagCount }} ])
+        {{ end }}
+
+        const tagWrapper = document.querySelector("#tag-wrapper");
+        WordCloud(tagWrapper, {
+            list: tagArray,
+            weightFactor: {{ $cloudsize }},
+            classes: "tag-cloud-item",
+        });
+
+        tagWrapper.addEventListener('wordcloudstop', function (e) {
+            document.querySelectorAll('.tag-cloud-item').forEach(function (element) {
+                const text = element.innerHTML;
+                const text_url = text.toLowerCase().replace(/[^-+\w\sㄱ-힣]/g, '').replace(/[+ ]+/g, '-');
+                element.innerHTML = `<a href="{{ $baseurl }}{{ $taxonomy }}/${text_url}/" style="color: inherit;">${text}</a>`;
+            });
+        });
+    </script>
+</section>
+
+<p>{{$block.Content}}</p>
