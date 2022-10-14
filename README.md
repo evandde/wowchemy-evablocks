@@ -42,9 +42,9 @@ Thank you!
     ---
    ```
    
-   ---
+ ---
    
-   # Wowchemy에서 사용할 수 있는 더 예쁜 태그클라우드
+ # Wowchemy에서 사용할 수 있는 더 예쁜 태그클라우드
 
 Wowchemy가 제공하는 tag_cloud block보다 **더 예쁜 태그클라우드**!
 
