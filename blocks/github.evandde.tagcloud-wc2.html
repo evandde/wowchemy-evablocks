@@ -28,7 +28,7 @@
         let tagArray = new Array();
         {{ range $name, $term := $tags }}
             {{ $tagCount := len $term.Pages }}
-            tagArray.push([{{ .Page.Title }}, {{ $tagCount }} ])
+            tagArray.push([{{ .Page.Title }}, {{ math.Log $tagCount }} ])
         {{ end }}
 
         const tagWrapper = document.querySelector("#tag-wrapper");
