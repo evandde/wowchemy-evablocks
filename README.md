@@ -1,70 +1,95 @@
-# [Wowchemy Block Starter Template](https://github.com/wowchemy/wowchemy-block-starter)
+# Prettier tag cloud for wowchemy
 
-**Looking to build and publish a [Wowchemy Block](https://wowchemy.com/blocks/) that doesn’t exist yet?**
+**Prettier tag cloud** than original wowchemy tag_cloud block!
 
-_[**Wowchemy**](https://wowchemy.com) makes it easy to create a beautiful website for free. Edit your site in Markdown, Jupyter, or RStudio, generate it with Hugo, and deploy with GitHub or Netlify. Customize anything on your site with blocks, themes, and language packs._
+Implemented by using [wordcloud2.js](https://github.com/timdream/wordcloud2.js).
 
-## 👉 Core Concepts
+Based on the codes from [https://blog.cubieserver.de/2020/adding-a-tag-cloud-to-my-hugo-blog/](https://blog.cubieserver.de/2020/adding-a-tag-cloud-to-my-hugo-blog/).
+I revised some part of the codes to use with wowchemy block.
 
-- Each Wowchemy block consists of an HTML file
-- You may use [Go Templating](https://gohugo.io/templates/introduction/) and [Bootstrap](https://getbootstrap.com/docs/4.5/layout/grid/) layouts to design the block HTML
+You can see the demo on [EvaNOTE](https://evanote.mew.kr/#tags) (my website published with Wowchemy).
 
-## 🧑‍🎨 Create a Block
-
-1. Click the [_Use This Template_](https://github.com/wowchemy/wowchemy-block-starter/generate) button on GitHub
-   1. Name your repository with an appropriate name for your block collection, such as `alices-wowchemy-blocks`
-1. Browse your new GitHub project, click the  `go.mod` file, and then the ✏️ pencil button to edit it
-   1. Replace the placeholder URL in `go.mod` with your new GitHub URL in the form `module github.com/<USERNAME>/<COLLECTION-NAME>` where `<USERNAME>` is your GitHub username and `<COLLECTION-NAME>` is a name for your collection of blocks
-   1. Scroll to the bottom and click _Commit Changes_ to save
-1. Browse to the `blocks/` folder, click `my-block.html`, and click the ✏️ pencil button to edit it
-   1. Rename `my-block.html` in the text box to a unique ID in the form `github.<USERNAME>.<BLOCK-NAME>.html`, again replacing  `<USERNAME>` with your GitHub username and `<BLOCK-NAME>` with your block name. It's important to provide this **globally unique block name**, otherwise another block can conflict with your block.
-   1. Repeat the above step to rename the style file, `my-block.scss`
-   1. Scroll to the bottom and click _Commit Changes_ to save
-1. Edit the HTML for your new block
-   - You may use [Go Templating](https://gohugo.io/templates/introduction/) and [Bootstrap](https://getbootstrap.com/docs/4.5/layout/grid/) layouts
-   - You can access page and block (page section) variables using `$page` and `$block`, respectively
-   - Check out the [built-in blocks](https://github.com/wowchemy/wowchemy-hugo-themes/tree/main/modules/wowchemy/layouts/partials/blocks) for inspiration
-
-### Example
-
-Say your GitHub username is `pikachu` and you wish to create a block named `pokemon`:
-
-1. We click _Use This Template_ and enter `wowchemy-block-pokemon` as the project name
-1. We replace the first line of `go.mod` with `module github.com/pikachu/wowchemy-block-pokemon`
-1. We browse to the `blocks/` folder, and rename `my-block.html` to `github.pikachu.pokemon.html`
-1. We rename rename `my-block.scss` to `github.pikachu.pokemon.scss`
-1. We customize the HTML in `github.pikachu.pokemon.html` and the style in `github.pikachu.pokemon.scss`
-1. We add the block to our site and share the block with the community following the guide below
+Thank you!
 
 ## 🌈 Add the Block to your Site
 
-1. Install the block by referencing it in your `config/_defaults/config.yaml`:
+1. Add the [wordcloud2.js](https://raw.githubusercontent.com/timdream/wordcloud2.js/gh-pages/src/wordcloud2.js) file to your `static/js/` directory.
+
+2. Install the block by referencing it in your `config/_defaults/config.yaml`:
    ```yaml
    module:
      imports:
-       # Your block's GitHub URL (replace <USERNAME> and <COLLECTION-NAME> with your GitHub username and block collection name)
-       - path: github.com/<USERNAME>/wowchemy-block-<COLLECTION-NAME>
+       - path: github.com/evandde/wowchemy-evablocks
    ```
-1. Create an instance of your block in `home/`, for example let's create `home/my-block.md`:
+3. Create an instance of your block in `home/`, for example let's create `home/my-block.md`:
    ```markdown
-   ---
-   # Replace <USERNAME> and <BLOCK-NAME> with your GitHub username and block name, respectively.
-   widget: 'github.<USERNAME>.<BLOCK-NAME>'
+    ---
+    widget: 'github.evandde.tagcloud-wc2'
 
-   # This file represents a page section.
-   headless: true
+    # This file represents a page section.
+    headless: true
 
-   # Order that this section appears on the page.
-   weight: 1
+    # Order that this section appears on the page.
+    weight: 40
 
-   title: Hello
-   ---
+    title: 
 
-   Welcome to my new block!
+    content:
+    # Choose the taxonomy from `config.toml` to display (e.g. tags, categories)
+    taxonomy: tags
+    # Choose how many tags you would like to display (0 = all tags)
+    count: 0
+    # Choose the cloud size (the more words, the less size is recommended)
+    cloudsize: 40
+    ---
+   ```
+   
+3. Add the [wordcloud2.js](https://raw.githubusercontent.com/timdream/wordcloud2.js/gh-pages/src/wordcloud2.js) file to your `static/js/` directory.
+
+ ---
+   
+ # Wowchemy에서 사용할 수 있는 더 예쁜 태그클라우드
+
+Wowchemy가 제공하는 tag_cloud block보다 **더 예쁜 태그클라우드**!
+
+[wordcloud2.js](https://github.com/timdream/wordcloud2.js)를 사용하여 제작하였습니다.
+
+[https://blog.cubieserver.de/2020/adding-a-tag-cloud-to-my-hugo-blog/](https://blog.cubieserver.de/2020/adding-a-tag-cloud-to-my-hugo-blog/) 블로그에서 소개하는 코드를 기반으로 제작하였습니다. 이 코드를 wowchemy block으로서 사용할 수 있도록 일부분을 수정한 것입니다.
+
+실제 사용예시를 [EvaNOTE](https://evanote.mew.kr/#tags)에서 확인할 수 있습니다. (Wowchemy로 만든 저의 개인 블로그입니다)
+
+감사합니다!
+
+## 🌈 사이트에 이 블록을 추가하는법
+
+1. [wordcloud2.js](https://raw.githubusercontent.com/timdream/wordcloud2.js/gh-pages/src/wordcloud2.js) 파일을 `static/js/` 폴더에 추가.
+
+2. `config/_defaults/config.yaml`의 모듈 부분에 다음의 코드를 추가하여 블록 설치:
+   ```yaml
+   module:
+     imports:
+       - path: github.com/evandde/wowchemy-evablocks
+   ```
+3. 블록을 구현하기 위한 md파일을 생성. 예를 들어, `home/my-block.md`와 같은 파일을 만들고 다음의 코드 추가:
+   ```markdown
+    ---
+    widget: 'github.evandde.tagcloud-wc2'
+
+    # This file represents a page section.
+    headless: true
+
+    # Order that this section appears on the page.
+    weight: 40
+
+    title: 
+
+    content:
+    # Choose the taxonomy from `config.toml` to display (e.g. tags, categories)
+    taxonomy: tags
+    # Choose how many tags you would like to display (0 = all tags)
+    count: 0
+    # Choose the cloud size (the more words, the less size is recommended)
+    cloudsize: 40
+    ---
    ```
 
-## 📢 Share your block
-
-Add the [wowchemy-hugo-extension](https://github.com/topics/wowchemy-hugo-extension) tag to your block's GitHub repository to help other users find it.
-
-Share your block with the community on [Discord](https://discord.gg/z8wNYzb) and [Twitter](https://twitter.com/intent/tweet?text=I%27m%20creating%20a%20beautiful%20website%20section%20using%20the%20free%20%E2%9D%A4%EF%B8%8F%2C%20open%20source%20%40wowchemy%20Website%20Builder%20for%20%40GoHugoIO%20by%20%40GeorgeCushen%20%E2%9C%A8%20Have%20some%20feedback%3F%20Please%20comment%20%F0%9F%A4%97&hashtags=MadeWithWowchemy&url=https://wowchemy.com/).
